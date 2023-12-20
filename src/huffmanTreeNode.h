@@ -86,11 +86,12 @@ public:
             right->debug_print_to_cout();
         }
     }
-    
-private:
+
+    // FIXME: remove this comment
+    // maybe want these all to be private, and only give the tree direct access?
     HuffmanTreeNode* left;
     HuffmanTreeNode* right;
-
+private:
     unsigned int priority;
     char encodedChar;    
 

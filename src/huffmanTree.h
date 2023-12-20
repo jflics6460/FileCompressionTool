@@ -47,13 +47,45 @@ public:
         debug_print_to_cout();
     }
 
+    void generateEncodings() {
+        // TODO: fails if char does not appear in tree
+        std::vector<bool> encodingAccumulator(0);
+        generateEncodingsSearch(root, encodingAccumulator);
+    }
+
 
 private:
+    std::unordered_map<char, std::vector<bool> > charToEncoding;
     HuffmanTreeNode* root;
+
+    void generateEncodingsSearch(HuffmanTreeNode* root, std::vector<bool>& encoding) {
+        if(root->left == nullptr and root->right == nullptr) {
+            charToEncoding[root->getEncodedChar()] = encoding;
+            std::cout << root->getEncodedChar() << ": ";
+            for(auto bit : encoding) {
+                std::cout << bit;
+            }
+            std::cout << std::endl;
+        }
+
+        if(root->left != nullptr) {
+            encoding.push_back(0);
+            generateEncodingsSearch(root->left, encoding);
+            encoding.pop_back();
+        }
+
+        if(root->right != nullptr) {
+            encoding.push_back(1);
+            generateEncodingsSearch(root->right, encoding);
+            encoding.pop_back();
+        }
+
+    }
 
     void debug_print_to_cout() {
         if (root != nullptr) {
             root->debug_print_to_cout();
         }
+        std::cout << std::endl;
     }
 };
