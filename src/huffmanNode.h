@@ -57,40 +57,8 @@ public:
         other.right = nullptr;
     }
 
-    HuffmanNode(HuffmanNode& other)
-    : left(nullptr)
-    , right(nullptr)
-    , priority(other.priority)
-    , encodedChar(other.encodedChar)
-    {
-        if (other.left != nullptr) {
-            left = new HuffmanNode(*other.left);
-        }
-
-        if (other.right != nullptr) {
-            right = new HuffmanNode(*other.right);
-        }
-    }
-
-    HuffmanNode operator=(HuffmanNode& other) {
-        if(this != &other) {
-            if(other.left != nullptr) {
-                left = new HuffmanNode(*other.left);
-            } else {
-                left = nullptr;
-            }
-
-            if(other.right != nullptr) {
-                right = new HuffmanNode(*other.right);
-            } else {
-                right = nullptr;
-            } 
-
-            priority = other.priority;
-            encodedChar = other.encodedChar;
-        }
-        return *this; 
-    }
+    HuffmanNode(HuffmanNode& other) = delete;
+    HuffmanNode operator=(HuffmanNode& other) = delete;
 
 
     unsigned int getPriority() {
